@@ -1,0 +1,8 @@
+---
+# create_vpc.yml
+- name: Deploying apache to EC2
+  hosts: myhost
+  become: yes
+  roles:
+    - deployment
+    

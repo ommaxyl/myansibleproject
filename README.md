@@ -13,3 +13,6 @@ or visit https://docs.aws.amazon.com/console/cloud9/ for our documentation.
 
 Happy coding!
 # myansibleproject
+This project involves the use of ansible role  as IaC (Infrastructure as Code) and configuration management tool. In thgis project, ansible was used to set up an EC2. This involves creating a VPC, Cidr blocks, Subnets, Internet gateways, Route Tables, and Nat gateway using Ansible. Web application was later deployed into this instance with Ansible.
+
+

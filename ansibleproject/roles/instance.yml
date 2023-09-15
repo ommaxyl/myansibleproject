@@ -1,9 +1,16 @@
 ---
 # create_vpc.yml
-- hosts: localhost
+- name: Create VPC, SG and Webserver using the localhost
+  hosts: localhost
   gather_facts: no
   roles:
     - vpc
     - sg
     - webserver
     
+- name: Do deployment activities on the hosts
+  hosts: my_group
+  become: yes
+  roles:
+    - my_ssh_key
+    - deployment

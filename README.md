@@ -16,3 +16,9 @@ Happy coding!
 This project involves the use of ansible role  as IaC (Infrastructure as Code) and configuration management tool. In thgis project, ansible was used to set up an EC2. This involves creating a VPC, Cidr blocks, Subnets, Internet gateways, Route Tables, and Nat gateway using Ansible. Web application was later deployed into this instance with Ansible.
 
 
+You need to install all this if not available in your environment:
+Python3
+Python3-pip
+Configure aws
+Boto3
+ansible-galaxy collection install amazon.aws

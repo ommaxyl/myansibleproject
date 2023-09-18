@@ -1,0 +1,5 @@
+---
+# defaults file for roles/webserver
+instance_type: t2.micro
+key_name: project1
+image_id: ami-04cb4ca688797756f

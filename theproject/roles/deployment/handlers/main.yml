@@ -1,0 +1,6 @@
+---
+# handlers file for roles/deployment
+- name: Restarting my Linux
+  service: 
+    name: httpd
+    state: restarted

@@ -1,0 +1,15 @@
+---
+# tasks file for host-integrator
+- name: "Add new Instance to Host group"
+  add_host:
+    hostname: "{{ item.public_ip }}"
+    groupname: webapp
+  loop: "{{ myEC2.instances }}"
+
+- name: "Wait for SSH in Instance"
+  wait_for:
+    host: "{{ item.public_dns_name }}"
+    port: 22
+    state: started
+  loop: "{{ myEC2.instances }}"
+

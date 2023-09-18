@@ -1,0 +1,16 @@
+---
+# tasks file for roles/sg
+- name: My Instance Security Group
+  amazon.aws.ec2_security_group:
+    name: myVPCSecurityGroup
+    description: Security group with SSH capabilities
+    vpc_id: "{{ vpc_result.vpc.id }}"
+    rules:
+      - proto: tcp
+        ports:
+          - 22
+          - 443
+          - 80
+        cidr_ip: 0.0.0.0/0
+  register: myVPCSecurityGroup      
+  

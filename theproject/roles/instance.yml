@@ -1,0 +1,22 @@
+---
+# create_vpc.yml
+- name: Create VPC, SG and Webserver using the localhost
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - vpc
+    - sg
+    - webserver
+    - host-integrator
+
+- name: Integrate new Ip address into the host
+  hosts: localhost
+  gather_facts: yes
+  roles:
+    - host-integrator
+
+- name: Running the WebApp using the public IP
+  hosts: webapp
+  gather_facts: yes
+  roles:
+    - deployment

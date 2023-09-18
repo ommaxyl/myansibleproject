@@ -1,0 +1,19 @@
+---
+# tasks file for roles/webserver
+- name: Spinning up my webserver 
+  amazon.aws.ec2_instance:
+    vpc_subnet_id: "{{ subnet.subnet.id }}"
+    key_name: "{{ key_name }}"
+    region: "{{ region }}"
+    instance_type: "{{ instance_type }}"
+    image_id: "{{ image_id }}"
+    security_group: "{{ myVPCSecurityGroup.group_id }}"
+    name: myVPCServer
+    network:
+      assign_public_ip: true
+    state: present
+    wait: yes
+    tags:
+      EnvName: Test-Environment
+  register: myEC2
+  

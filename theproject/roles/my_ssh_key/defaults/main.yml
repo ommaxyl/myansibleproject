@@ -1,0 +1,4 @@
+---
+# defaults file for my_ssh_key
+ssh_user: hosts
+ssh_public_key: ""

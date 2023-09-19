@@ -61,6 +61,11 @@ Stages
        d. deployment stage:
            In this stage, webapp was deployed to the instance (in runningf stage). httpd was set up and used to patch the server.
 
+   Setting up dynamic Plugin:
+   This is to enable ansible to grab the public ip of a newly changed or created instance. The steps to automate this process is listed below:
+   1 install "ansible-galaxy collection install amazon.aws"
+   2. Create a yaml file that ends with aws_ec2.yml or aws_ec2.yaml (aws_ec2.yml)
+
    Problems:
    The instance was deployed using ansible but I am still having problem changing the host from localhost (that was used to deploy the instance) to the ec2 so as to patch it.
    

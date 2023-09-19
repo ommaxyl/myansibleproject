@@ -12,7 +12,8 @@
     network:
       assign_public_ip: true
     state: present
+    wait: true
     tags:
       EnvName: Test-Environment
   register: myEC2
-  
+

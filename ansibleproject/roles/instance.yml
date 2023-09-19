@@ -6,11 +6,14 @@
   roles:
     - vpc
     - sg
-    - webserver
-    
-- name: Do deployment activities on the hosts
-  hosts: my_group
-  become: yes
+
+- name: Create Instance
+  hosts: localhost
+  gather_facts: yes
   roles:
-    - my_ssh_key
+    - webserver
+
+- name: Do deployment activities on the hosts
+  hosts: myEC2.public_ip
+  roles:
     - deployment

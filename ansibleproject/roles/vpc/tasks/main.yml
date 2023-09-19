@@ -24,6 +24,7 @@
   community.aws.ec2_vpc_igw:
     vpc_id: "{{ vpc_result.vpc.id }}"
     region: "{{ region }}"
+    state: present
   register: igw
 
 - name: Create Route Table

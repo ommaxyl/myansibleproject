@@ -2,9 +2,14 @@
 # tasks file for roles/deployment
 - name: Ensure apache is installed
   become: yes
-  yum:
+  package:
     name: httpd
     state: present
+  when:
+    - ansible_pkg_mgr == "yum"
+  vars:
+    use_backend: yum
+  
 
 - name: Starting Apache
   become: yes

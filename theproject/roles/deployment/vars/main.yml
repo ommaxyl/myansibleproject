@@ -1,3 +1,0 @@
----
-# vars file for roles/deployment
-cloud_provider: "aws"

@@ -1,6 +1,0 @@
-- name: Debug item variable
-  hosts: localhost
-  tasks:
-    - name: Debug item variable
-      debug:
-        var: myEC2.public_ip

@@ -16,19 +16,3 @@
     tags:
       EnvName: Test-Environment
   register: ec2
-  delegate_to: localhost
-
-- name: Add instance to the host group
-  add_host:
-    hostname: "{{ item.public_ip }}"
-    groupname: launched
-  loop: "{{ ec2.instances }}"
-
-- name: Wait for SSH to come up
-  local_action:
-    module: wait_for
-    host: "{{ item.public_ip }}"
-    port: 22
-    delay: 10
-    timeout: 120
-  loop: "{{ ec2.instances }}"

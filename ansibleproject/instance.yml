@@ -6,14 +6,9 @@
   roles:
     - vpc
     - sg
-
-- name: Create Instance
-  hosts: localhost
-  gather_facts: yes
-  roles:
     - webserver
 
 - name: Do deployment activities on the hosts
-  hosts: item.public_ip 
+  hosts: localhost
   roles:
     - deployment

@@ -7,20 +7,10 @@
     vpc_id: "{{ vpc_result.vpc.id }}"
     rules:
       - proto: tcp
-        from_port: 80
-        to_port: 80
-        cidr_ip: 0.0.0.0/0
-      - proto: tcp
-        from_port: 22
-        to_port: 22
-        cidr_ip: 0.0.0.0/0
-      - proto: tcp
-        from_port: 443
-        to_port: 443
-        cidr_ip: 0.0.0.0/0
-      - proto: icmp
-        from_port: 8
-        to_port: -1
+        ports:
+         - '22'
+         - '80'
+         - '443'
         cidr_ip: 0.0.0.0/0
   register: myVPCSecurityGroup      
   

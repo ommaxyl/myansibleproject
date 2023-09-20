@@ -1,0 +1,10 @@
+---
+# tasks file for ssh_key_copy
+- name: Copy SSH public key to the server
+  copy:
+    src: /home/hello/.ssh
+    dest: /home/remote_user/.ssh/authorized_keys
+    owner: remote_user
+    group: remote_user
+    mode: '0600'
+  become: true

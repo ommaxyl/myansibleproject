@@ -2,7 +2,7 @@
 # tasks file for roles/webserver
 - name: Spinning up my webserver 
   amazon.aws.ec2_instance:
-    vpc_subnet_id: "{{ subnet.subnet.id }}"
+    vpc_subnet_id: "{{ public_subnet.subnet.id }}"
     key_name: "{{ key_name }}"
     region: "{{ region }}"
     instance_type: "{{ instance_type }}"

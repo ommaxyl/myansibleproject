@@ -1,0 +1,8 @@
+---
+# tasks file for ansibleproject/roles/create-igw
+- name: Create Internet Gateway
+  community.aws.ec2_vpc_igw:
+    vpc_id: "{{ vpc_result.vpc.id }}"
+    region: "{{ region }}"
+    state: present
+  register: igw

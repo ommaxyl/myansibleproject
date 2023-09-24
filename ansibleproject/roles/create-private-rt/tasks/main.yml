@@ -1,0 +1,13 @@
+---
+# tasks file for ansibleproject/roles/create-private-rt
+- name: Create Private Route Table
+  amazon.aws.ec2_vpc_route_table:
+    region: "{{ region }}"
+    subnets:
+      - "{{ private_subnet.subnet.id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ new_nat_gateway.nat_gateway_id }}"
+    vpc_id: "{{ vpc_result.vpc.id }}"
+    tags:
+      Name: myVPCPrivateRouteTable

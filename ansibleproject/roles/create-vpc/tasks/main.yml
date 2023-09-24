@@ -1,0 +1,11 @@
+---  
+# tasks file for roles/vpc
+- name: Create the AWS VPC
+  amazon.aws.ec2_vpc_net:
+    name: "{{ vpc_name }}"
+    cidr_block: "{{ vpc_cidr_block }}"
+    region: "{{ region }}"
+    state: present
+  register: vpc_result
+
+

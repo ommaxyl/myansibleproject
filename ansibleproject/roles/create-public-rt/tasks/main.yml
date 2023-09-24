@@ -1,0 +1,13 @@
+---
+# tasks file for ansibleproject/roles/create-public-rt
+- name: Create Public Route Table
+  amazon.aws.ec2_vpc_route_table:
+    region: "{{ region }}"
+    subnets:
+      - "{{ public_subnet.subnet.id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw.gateway_id }}"
+    vpc_id: "{{ vpc_result.vpc.id }}"
+    tags:
+      Name: myVPCPublicRouteTable

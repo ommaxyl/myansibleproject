@@ -4,11 +4,17 @@
   hosts: localhost
   gather_facts: no
   roles:
-    - vpc
-    - sg
-    - webserver
+    - create-vpc
+    - create-public-subnet
+    - create-private-subnet
+    - create-igw
+    - create-public-rt
+    - create-nat-gtw
+    - create-private-rt
+    - create-sg
+    - create-instance
 
 - name: Do deployment activities on the hosts
   hosts: localhost
   roles:
-    - deployment
+    - deploy-httpd

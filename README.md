@@ -69,4 +69,4 @@ Stages
    Problems:
    The instance was deployed using ansible but I am still having problem changing the host from localhost (that was used to deploy the instance) to the ec2 so as to patch it.
    
-   
+  *** ansible-playbook ansibleproject/instance.yml -i ansibleproject/aws_ec2.yml 

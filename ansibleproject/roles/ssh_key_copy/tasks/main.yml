@@ -1,10 +1,9 @@
 ---
-# tasks file for ssh_key_copy
-- name: Copy SSH public key to the server
-  copy:
-    src: /home/hello/.ssh
-    dest: /home/remote_user/.ssh/authorized_keys
-    owner: remote_user
-    group: remote_user
-    mode: '0600'
+- name: Copy SSH Private Key
+  ansible.builtin.copy:
+    src: /tmp/ansiblekey.pem  # Path to your local PEM key
+    dest: /home/ec2-user/.ssh/id_rsa # Destination path on the remote server
+    owner: ec2-user  # Set the owner of the copied key
+    group: ec2-user  # Set the group of the copied key
+    mode: '0600'  # Set the file permissions
   become: true

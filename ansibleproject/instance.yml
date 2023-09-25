@@ -13,8 +13,11 @@
     - create-private-rt
     - create-sg
     - create-instance
+    
 
 - name: Do deployment activities on the hosts
-  hosts: localhost
+  hosts: aws_ec2
+  gather_facts: yes
   roles:
+    - ssh_key_copy
     - deploy-httpd

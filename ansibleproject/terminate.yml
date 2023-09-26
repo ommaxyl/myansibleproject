@@ -1,0 +1,8 @@
+# terminate all resources
+- name: terminate instance and others
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - delete-instance
+    
+

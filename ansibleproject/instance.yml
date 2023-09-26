@@ -13,11 +13,16 @@
     - create-private-rt
     - create-sg
     - create-instance
-    
 
 - name: Do deployment activities on the hosts
-  hosts: aws_ec2
-  gather_facts: yes
+  hosts: ubuntu
+  gather_facts: no
   roles:
     - ssh_key_copy
-    - deploy-httpd
+
+- name: ping dynamic inventory
+  hosts: ubuntu
+  tasks:
+    - name: ping the host
+      ping:
+

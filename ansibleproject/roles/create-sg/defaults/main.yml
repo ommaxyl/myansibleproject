@@ -1,2 +1,3 @@
 ---
 # defaults file for roles/sg
+myIP: 157.130.87.238/32

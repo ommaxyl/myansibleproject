@@ -19,6 +19,7 @@
   gather_facts: no
   roles:
     - ssh_key_copy
+    - deploy-httpd
   tasks:
     - name: ping the dynamic host
       ping:

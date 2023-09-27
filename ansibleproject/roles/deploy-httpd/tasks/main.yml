@@ -5,12 +5,8 @@
   package:
     name: httpd
     state: present
-  when:
-    - ansible_pkg_mgr == "yum"
-  vars:
-    use_backend: yum
+  register: httpd
   
-
 - name: Starting Apache
   become: true
   service:
@@ -23,6 +19,5 @@
   template:
     src: index.html.j2
     dest: /var/www/html/index.html
-  notify:
-    - Restarting my Linux
+ 
  

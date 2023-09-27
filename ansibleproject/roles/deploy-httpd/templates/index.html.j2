@@ -23,7 +23,22 @@
 
     <h1> This is a webserver running in an EC2 Instance:</h1>
     <h4> Powered by {{ cloud_provider }}</h4>
-    
+
+
+    <p id="ipAddress">IP Address: Loading...</p>
+
+    <script>
+        // JavaScript to fetch server information
+        fetch('https://ipinfo.io/json')
+            .then(response => response.json())
+            .then(data => {
+                // Update the IP address and DNS name in the HTML
+                document.getElementById('ipAddress').textContent = `IP Address: ${data.ip}`; })
+            .catch(error => {
+                console.error('Error fetching server information:', error);
+                document.getElementById('ipAddress').textContent = 'Failed to fetch IP address'; });
+    </script>
+                                          <b> By Muheez Opebiyi</b>
   </div>
 </body>
 </html>

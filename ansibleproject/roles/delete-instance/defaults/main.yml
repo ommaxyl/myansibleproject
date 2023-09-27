@@ -5,4 +5,4 @@ ec2_name_tag: myVPCServer
 vpc_name: myVPC
 ec2_env: Test-Environment
 vpc_cidr_block: 10.100.0.0/16
-nat_gateway_id: nat-04e8f51be437a545b
+nat_gateway_id: nat-0a08d25aff4400bb8

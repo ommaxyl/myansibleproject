@@ -19,10 +19,7 @@
   gather_facts: no
   roles:
     - ssh_key_copy
-
-- name: ping dynamic inventory
-  hosts: ubuntu
   tasks:
-    - name: ping the host
+    - name: ping the dynamic host
       ping:
 

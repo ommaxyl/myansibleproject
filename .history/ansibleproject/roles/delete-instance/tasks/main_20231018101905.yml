@@ -1,0 +1,42 @@
+---
+# tasks file for delete-instance
+- name: Deleting the Instance
+  amazon.aws.ec2_instance:
+    region: "{{ region }}"
+    state: absent
+    filters:
+      instance-state-name: running
+      tag:Name : "{{ ec2_name_tag }}"
+      tag:EnvName : "{{ ec2_env }}"
+
+- name: Grab VPC details
+  amazon.aws.ec2_vpc_net_info:
+    region: "{{ region }}"
+    filters:
+      tag:Environment: "{{ ec2_env }}"
+  register: all_vpcs
+
+- name: Gather information about NAT gateways
+  ec2_nat_gateway_info:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ aws_region }}"
+    register: nat_gateway_info
+
+
+- name: Delete nat gateway and release EIP.
+  community.aws.ec2_vpc_nat_gateway:
+    state: absent
+    nat_gateway_id: "{{ natnat_gateway_id }}"
+    release_eip: true
+    wait: yes
+    wait_timeout: 300
+    region: "{{ region }}"
+
+- name: Delete AWS VPC
+  amazon.aws.ec2_vpc_net:
+    name: "{{ vpc_name }}"
+    cidr_block: "{{ vpc_cidr_block }}"
+    region: "{{ region }}"
+    state: absent
+   

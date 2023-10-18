@@ -1,0 +1,3 @@
+---
+# defaults file for ansibleproject/roles/create-private-subnet
+cidr_private10.100.1.0/24

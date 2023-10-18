@@ -1,0 +1,41 @@
+---
+- name: Waiting for a few seconds for the machine to ---
+apiVersion: sparkoperator.k8s.io/v1beta1
+kind: SparkApplication
+metadata:
+  name: name
+spec:
+  type: Python
+  mode: cluster
+  image: 'gcr.io/spark-operator/spark-py:v2.4.0'
+  imagePullPolicy: Always
+  mainApplicationFile: 'local:///opt/spark/examples/jars/spark-examples_2.11-2.4.0.jar'
+  mainClass: org.apache.spark.examples.SparkPi
+  sparkVersion: 2.4.0
+  restartPolicy:
+    type: OnFailure
+    onFailureRetries: 3
+    onFailureRetryInterval: 10
+    onSubmissionFailureRetries: 5
+    onSubmissionFailureRetryInterval: 20
+  driver:
+    cores: 0.1
+    coreLimit: 200m
+    memory: 512m
+    labels:
+      version: 2.4.0
+    serviceAccount: spark
+  executor:
+    cores: 1
+    instances: 1
+    memory: 512m
+    labels:
+      version: 2.4.0
+- name: Copy SSH Private Key
+  ansible.builtin.copy:
+    src: /opt/ansiblekey.pem  # Path to your local PEM key
+    dest: /home/ec2-user/ansiblekey.pem # Destination path on the remote server
+    owner: ec2-user  # Set the owner of the copied key
+    group: ec2-user  # Set the group of the copied key
+    mode: '0600'  # Set the file permissions
+  become: true

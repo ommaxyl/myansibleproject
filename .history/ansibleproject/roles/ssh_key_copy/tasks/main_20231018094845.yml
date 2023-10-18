@@ -1,0 +1,11 @@
+---
+- name: Waiting for a few seconds for the machine to start 
+  
+- name: Copy SSH Private Key
+  ansible.builtin.copy:
+    src: /opt/ansiblekey.pem  # Path to your local PEM key
+    dest: /home/ec2-user/ansiblekey.pem # Destination path on the remote server
+    owner: ec2-user  # Set the owner of the copied key
+    group: ec2-user  # Set the group of the copied key
+    mode: '0600'  # Set the file permissions
+  become: true

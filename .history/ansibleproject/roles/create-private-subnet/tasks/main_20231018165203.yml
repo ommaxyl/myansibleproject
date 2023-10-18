@@ -1,0 +1,12 @@
+---
+# tasks file for ansibleproject/roles/create-private-subnet
+- name: Create Private Subnet
+  amazon.aws.ec2_vpc_subnet:
+    vpc_id: "{{ vpc_result.vpc.id }}"
+    cidr: "{{ cidr}}"
+    az: "{{ region }}a"
+    region: "{{ region }}"
+    state: present
+    tags:
+      Name: myVPC-Private-Subnet
+  register: private_subnet

@@ -1,3 +1,0 @@
----
-# defaults file for ansibleproject/roles/create-public-subnet
-public_subnet: 10.100.0.0/24

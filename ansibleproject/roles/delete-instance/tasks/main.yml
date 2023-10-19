@@ -16,21 +16,20 @@
       tag:Name : "{{ vpc_name }}"
   register: all_vpcs
 
-- name: Gather information about NAT gateways
-  amazon.aws.ec2_vpc_nat_gateway_info:
+- name: Gather information about all Security Groups in Environment
+  amazon.aws.ec2_group_info:
     region: "{{ region }}"
     filters:
-      state: ['available']
-  register: nat_gateway_result
+      vpc-id: "{{ all_vpcs.vpcs[0].vpc_id }}"
+  register: all_sg
 
-# - name: Delete nat gateway and release EIP.
-#   community.aws.ec2_vpc_nat_gateway:
-#     state: absent
-#     nat_gateway_id: "{{ nat_gateway_result.result[0].nat_gateway_id }}"
-#     release_eip: true
-#     wait: yes
-#     wait_timeout: 300
-#     region: "{{ region }}"
+- name: Delete Security Groups in VPC by ID
+  amazon.aws.ec2_group:
+    region: "{{ region }}"
+    group_id: "{{ item.group_id }}"
+    state: absent
+  loop: "{{ all_sg.security_groups }}"
+  when: item.group_name != "default"
 
 - name: Gather all route tables for the vpc
   amazon.aws.ec2_vpc_route_table_info:
@@ -42,7 +41,42 @@
     vpc_id: "{{ all_vpcs.vpcs[0].vpc_id }}"
     region: "{{ region }}"
     route_table_id: "{{ route_tables.route_tables[0].id }}"
+    tags:
+      Environment: "{{ myenv }}"
+      Name: "{{ myid1 }}"
     state: absent
+
+- name: Delete Route Tables2
+  amazon.aws.ec2_vpc_route_table:
+    vpc_id: "{{ all_vpcs.vpcs[0].vpc_id }}"
+    region: "{{ region }}"
+    route_table_id: "{{ route_tables.route_tables[0].id }}"
+    tags:
+      Environment: "{{ myenv }}"
+      Name: "{{ myid2 }}"
+    state: absent
+
+- name: Gather information about NAT gateways
+  amazon.aws.ec2_vpc_nat_gateway_info:
+    region: "{{ region }}"
+    filters:
+      state: ['available']
+  register: nat_gateway_result
+
+- name: Delete nat gateway and release EIP.
+  community.aws.ec2_vpc_nat_gateway:
+    state: absent
+    nat_gateway_id: "{{ nat_gateway_result.result[0].nat_gateway_id }}"
+    release_eip: true
+    wait: yes
+    wait_timeout: 300
+    region: "{{ region }}"
+
+- name: Delete internet gateway 
+  community.aws.ec2_vpc_igw:
+    region: "{{ region }}"
+    vpc_id: "{{ all_vpcs.vpcs[0].vpc_id }}"
+    state: absent 
 
 - name: Remove Public subnet for servers
   amazon.aws.ec2_vpc_subnet:
@@ -55,7 +89,7 @@
     state: absent
     cidr: "{{ cidr_private }}"
     vpc_id: "{{ all_vpcs.vpcs[0].vpc_id }}"
-    
+ 
 - name: Delete AWS VPC
   amazon.aws.ec2_vpc_net:
     name: "{{ vpc_name }}"

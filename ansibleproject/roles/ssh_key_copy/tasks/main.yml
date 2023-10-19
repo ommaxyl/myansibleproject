@@ -1,8 +1,4 @@
 ---
-- name: Waiting for a few seconds for the machine to start 
-  pause:
-    seconds: 100
-
 - name: Copy SSH Private Key
   ansible.builtin.copy:
     src: /opt/ansiblekey.pem  # Path to your local PEM key

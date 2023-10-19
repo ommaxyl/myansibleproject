@@ -16,3 +16,7 @@
     tags:
       EnvName: Test-Environment
   register: ec2
+
+- name: Waiting for a few seconds for the machine to start 
+  pause:
+    seconds: 100

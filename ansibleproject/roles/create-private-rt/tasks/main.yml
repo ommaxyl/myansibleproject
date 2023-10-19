@@ -11,3 +11,4 @@
     vpc_id: "{{ vpc_result.vpc.id }}"
     tags:
       Name: myVPCPrivateRouteTable
+      Environment: "{{ myenv }}"
